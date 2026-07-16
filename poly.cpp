@@ -11,7 +11,11 @@ struct Poly
 
 int main()
 {
-	int n1, n2, c, e, i, j, k = 0;
+	int n1, n2, c, e, i, j, k, action = 0;
+	cout<<"Which operation do you want to perform? \n";
+	cout<<" 1. Addition \n 2. Subtraction \n";
+	cin>>action;
+	
 	cout<<"Enter number of terms in 1st polynomial \n";
 	cin>>n1;
 	// enter terms for p1
@@ -37,49 +41,101 @@ int main()
 		cin>>e;
 		P2[i].exp = e;
 	}
+	
 	i = 0;
 	j = 0;
 	k = 0;
-	//addition
-	while(i<n1&&j<n2)
-	{
-		if(P1[i].exp==P2[j].exp)
-		{
-			RP[k].coef=P1[i].coef+P2[j].coef;
-			RP[k].exp=P1[i].exp;
-			i++;
-			j++;
-			k++;
-		}
-		else if(P1[i].exp>P2[j].exp)
-		{
-			RP[k]=P1[i];
-			i++;
-			k++;
-		}
-		else if(P2[j].exp>P1[i].exp)
-		{
-			RP[k]=P2[j];
-			j++;
-			k++;
-		}
-	}
 	
-	// Copy remaining terms of P1 (if any)
-    while(i < n1)
-    {
-        RP[k] = P1[i];
-        i++;
-        k++;
-    }
+	switch(action)
+	{
+		case 1:
+			//addition
+			while(i<n1&&j<n2)
+			{
+				if(P1[i].exp==P2[j].exp)
+				{
+					RP[k].coef=P1[i].coef+P2[j].coef;
+					RP[k].exp=P1[i].exp;
+					i++;
+					j++;
+					k++;
+				}
+				else if(P1[i].exp>P2[j].exp)
+				{
+					RP[k]=P1[i];
+					i++;
+					k++;
+				}
+				else if(P2[j].exp>P1[i].exp)
+				{
+					RP[k]=P2[j];
+					j++;
+					k++;
+				}
+			}
+			// Copy remaining terms of P1 (if any)
+    		while(i < n1)
+   			{
+        		RP[k] = P1[i];
+        		i++;
+        		k++;
+    		}
     
-    // Copy remaining terms of P2 (if any)
-    while(j < n2)
-    {
-        RP[k] = P2[j];
-        j++;
-        k++;
-    }
+    		// Copy remaining terms of P2 (if any)
+   		 	while(j < n2)
+    		{
+        		RP[k] = P2[j];
+        		j++;
+        		k++;
+    		}
+    		break;
+		
+		case 2:
+			//subtraction
+			
+			while(i<n1&&j<n2)
+			{
+				if(P1[i].exp==P2[j].exp)
+				{
+					RP[k].coef=P1[i].coef-P2[j].coef;
+					RP[k].exp=P1[i].exp;
+					i++;
+					j++;
+					k++;
+				}
+				else if(P1[i].exp>P2[j].exp)
+				{
+					RP[k]=P1[i];
+					i++;
+					k++;
+				}
+				else if(P2[j].exp>P1[i].exp)
+				{
+					RP[k]=P2[j];
+					j++;
+					k++;
+				}
+			}
+	
+			// Copy remaining terms of P1 (if any)
+   		 	while(i < n1)
+    		{
+       		 RP[k] = P1[i];
+       		 i++;
+      		  k++;
+   		 	}
+    
+   		 	// Copy remaining terms of P2 (if any)
+   		 	while(j < n2)
+   		 	{
+      			RP[k] = P2[j];
+      		  	j++;
+      		  	k++;
+   		 	}
+			break;
+			
+		}
+	
 	
 	//printing
 	cout<<"Answer: \n";
@@ -97,4 +153,3 @@ int main()
 		
 	}
 }
-
