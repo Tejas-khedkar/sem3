@@ -4,10 +4,11 @@
 #include <vector> // for pointers for quick sort
 using namespace std;
 
+
 class numbers
 {
 	public:
-		int n,i,j,temp,low,high,pivot,arr,swaps;
+		int n,i,j,temp,low,high,pivot,arr,swaps,comp;
 		int A[50000];
 		numbers(int num) //constructor
 		{
@@ -20,9 +21,19 @@ class numbers
 			}
 		}
 		
+		numbers() //input part
+		{
+			cout<<"Enter 10 numbers\n";
+			for(i=0;i<10;i++)
+			{
+				cin>>A[i];
+			}
+		}
+		
 		void bubbleSort(int n)
 		{
 			swaps=0;
+			comp=0;
 			for(i=0;i<n-1;i++)
 			{
 				for(j=0;j<n-i-1;j++)
@@ -34,17 +45,20 @@ class numbers
 						A[j+1]=temp;
 						swaps++;
 					}
+				comp++;	
 				}
 				//cout<<"\nPass "<<(i+1)<<" completed";
 			}
 			cout<<"\nSorted: ";
 			display();
-			cout<<"\n "<<swaps<<" swaps required\n";
+			display2();
+			
 		}
 		
 		void inserstionSort(int n)
 		{
 			swaps=0;
+			comp=0;
 			for(i=1;i<=(n-1);i++)
 			{
 				temp=A[i];
@@ -52,7 +66,9 @@ class numbers
 				while((j>=0)&&(A[j]>temp))
 				{
 					A[j+1]=A[j];
+					swaps++;
 					j = j-1;
+					comp++;
 				}
 				A[j+1]=temp;
 				swaps++;
@@ -60,11 +76,13 @@ class numbers
 			}
 			cout<<"\nSorted: ";
 			display();
-			cout<<"\n "<<swaps<<" swaps required\n";
+			display2();
+			
 		}
 		
 		void quickSort(int low, int high)
 		{
+			
 			if (low < high)
 			{
         	// Partition index
@@ -74,7 +92,7 @@ class numbers
         	quickSort(low, pi - 1);
         	quickSort(pi + 1, high);
     		}      
-			     
+			 
 		}
 		
 	int partition(int low, int high) //This is for quick sort method
@@ -87,11 +105,15 @@ class numbers
         if (A[j] >= pivot) {
             i--;
             swap(A[i], A[j]);
+            swaps++;
+
         }
+        comp++;
     }
 
     // Place pivot at its correct position
     swap(A[i - 1], A[low]);
+    swaps++;
     return i - 1; // Return pivot index
 	}
 		
@@ -105,6 +127,13 @@ class numbers
 				cout<<" ";
 			}
 			cout<<"\n";
+		}
+		
+		void display2()
+		{
+			cout<<"\n "<<swaps<<" swaps required\n";
+			cout<<"\n "<<comp<<" comparisions required\n";
+			
 		}
 };
 
@@ -154,6 +183,7 @@ int main()
 				end = clock();
 				cout<<"\nSorted: ";
 				a1.display();
+				a1.display2(); 
 				
 				time_taken = (end - start) / CLOCKS_PER_SEC * 1000;
 				cout << "\nTime taken to sort: " << time_taken << " ms" << endl;
@@ -168,3 +198,5 @@ int main()
 		
 	}while(a!=4);
 }
+
+//wow I have been writing this same code for weeks
