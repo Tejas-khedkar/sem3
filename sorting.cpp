@@ -79,6 +79,26 @@ class numbers
 			display2();
 			
 		}
+
+		void selectionSort(int n) {
+    		int size = n;
+			swaps=0;
+			comp=0;
+			
+    		for (int i = 0; i < size - 1; ++i) {
+        		int min_index = i;
+        		for (int j = i + 1; j < size; ++j) {
+            		if (A[j] < A[min_index]) {
+                		min_index = j;
+            		}
+					comp++;
+        		}
+        if (min_index != i) {
+            swap(A[i], A[min_index]);
+			swaps++;
+        }
+    		}	
+		}	
 		
 		void quickSort(int low, int high)
 		{
@@ -158,8 +178,9 @@ int main()
 		cout<<"\nWhich sorting algorithm you want to sort the elements? ";
 		cout<<"\n1. Bubble sort";
 		cout<<"\n2. Inserstion sort";
-		cout<<"\n3. Quick Sort ";
-		cout<<"\n4. Exit \n";
+		cout<<"\n3. Quick sort ";
+		cout<<"\n4. Selection sort ";
+		cout<<"\n5. Exit \n";
 		cin>>a;
 		
 		switch(a){
@@ -188,8 +209,17 @@ int main()
 				time_taken = (end - start) / CLOCKS_PER_SEC * 1000;
 				cout << "\nTime taken to sort: " << time_taken << " ms" << endl;
 				break;
-				
 			case 4:
+				start = clock();
+				a1.selectionSort(n);
+				end = clock();
+				cout<<"\nSorted: ";
+				a1.display();
+				a1.display2(); 
+				time_taken = (end - start) / CLOCKS_PER_SEC * 1000;
+				cout << "\nTime taken to sort: " << time_taken << " ms" << endl;
+				break;
+			case 5:
 				cout<<"\n Exiting...";
 				break;	
 			default:
