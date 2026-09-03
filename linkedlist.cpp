@@ -83,11 +83,25 @@ int main()
 						case 1:
 							{
 								// add node at start
+								cout<<"Enter an integer: ";
+								cin>>n;
+								Node *NN = new Node();
+								NN->data = n;
+								NN->next = head;
+								head = NN;
 								break;
 							}
 						case 2:
 							{
 								// search and add node after that place
+								cout<<"Enter an integer: ";
+								cin>>n;
+								Node *NN = new Node();
+								NN->data = n;
+								
+								cout<<"after which element do you want to add a new node?\n";
+								
+								
 								break;
 							}
 						case 3:
