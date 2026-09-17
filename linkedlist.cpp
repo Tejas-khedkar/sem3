@@ -11,7 +11,7 @@ class Node
 
 int main()
 {
-	int action, action2, n;
+	int action, action2, n, i, input, found;
 	Node *head = NULL;
 	Node *temp;
 	
@@ -21,7 +21,8 @@ int main()
 		cout<<"\n1. Add node (at the end)";
 		cout<<"\n2. Display the list";
 		cout<<"\n3. Add node (Anywhere)";
-		cout<<"\n4. Exit \n";
+		cout<<"\n4. Delete node ";
+		cout<<"\n5. Exit \n";
 		
 		cin>>action;
 		switch(action){
@@ -94,13 +95,33 @@ int main()
 						case 2:
 							{
 								// search and add node after that place
-								cout<<"Enter an integer: ";
+								cout<<"Enter an integer to add: ";
 								cin>>n;
 								Node *NN = new Node();
 								NN->data = n;
 								
 								cout<<"after which element do you want to add a new node?\n";
+								cin>>input;
+								found = 0;
 								
+								temp = head;
+								while(temp->next!=NULL)
+								{
+									temp = temp->next;
+									if(temp->data==input){
+										found = 1;
+										break;
+									}
+								}
+								if(found == 1)
+								{
+										NN->next=temp->next;
+										temp->next=NN;
+								}
+								else
+								{
+									cout<<"\n"<<input<<" isn't in this linked list";
+								}
 								
 								break;
 							}
@@ -130,6 +151,46 @@ int main()
 					
 					break;
 				}
+				
+			case 4:
+				{
+					//deletion code
+					cout<<"\nWhich node you want to delete? \n";
+					cin>>input;
+					temp = head;
+					found = 0;
+					while(temp->next != NULL)
+					{
+						
+						if(temp->next->data == input)
+						{
+							found = 1;
+							break;
+						}
+						else
+						{
+							temp = temp->next;
+						}
+					}
+					
+					if(found == 1)
+					{
+						if(temp->next->next != NULL)
+						{
+							temp->next = temp->next->next;
+							
+						}
+						else{
+							temp->next = NULL;
+						}
+						
+					}
+					else{
+						cout<<"\n"<<input<<" not found in this linked list";
+					}
+					
+					break;
+				}	
 			default:
 				{
 					cout<<"\ninvalid choice";
@@ -137,6 +198,6 @@ int main()
 				}
 				
 		}
-	}while(action!=4);
+	}while(action!=5);
 	
 }
