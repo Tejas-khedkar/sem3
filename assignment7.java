@@ -12,7 +12,14 @@ public class Start {
 
         int choice;
         do {
-            displayMenu();
+        	System.out.println("\n--- Menu ---");
+            System.out.println("1. Add");
+            System.out.println("2. Remove");
+            System.out.println("3. Update");
+            System.out.println("4. Duplicate");
+            System.out.println("5. Display");
+            System.out.println("6. Iterate Display");
+            System.out.println("7. Exit");
             System.out.print("Enter your choice: ");
             choice = scan.nextInt();
             scan.nextLine();
@@ -85,24 +92,15 @@ public class Start {
         }
     }
 
-    public static void displayMenu() {
-        System.out.println("\n--- Menu ---");
-        System.out.println("1. Add");
-        System.out.println("2. Remove");
-        System.out.println("3. Update");
-        System.out.println("4. Duplicate");
-        System.out.println("5. Display");
-        System.out.println("6. Iterate Display");
-        System.out.println("7. Exit");
-    }
+    
 }
 
 class Product {
-    private int id;
-    private String category;
-    private String name;
-    private double price;
-    private int quantity;
+    int id;
+    String category;
+    String name;
+    double price;
+    int quantity;
 
     public Product(int id, String category, String name, double price, int quantity) {
         this.id = id;
