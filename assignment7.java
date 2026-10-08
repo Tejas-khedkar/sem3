@@ -1,4 +1,101 @@
+package ass7;
 import java.util.*;
+
+public class Start {
+    private static Scanner scan = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        System.out.println(" Inventory Management System");
+
+        Collection<Product> inventory = selectStructure();
+        InventoryOperations operations = new InventoryOperations(inventory);
+
+        int choice;
+        do {
+            displayMenu();
+            System.out.print("Enter your choice: ");
+            choice = scan.nextInt();
+            scan.nextLine();
+
+            switch (choice) {
+                case 1:
+                    operations.addInventory();
+                    break;
+                case 2:
+                    operations.deleteInventory();
+                    break;
+                case 3:
+                    operations.updateInventory();
+                    break;
+                case 4:
+                    operations.checkDuplicates();
+                    break;
+                case 5:
+                    operations.normDisplay();
+                    break;
+                case 6:
+                    operations.iterateDisplay();
+                    break;
+                case 7:
+                    System.out.println("Exiting the program...");
+                    break;
+                default:
+                    System.out.println("Invalid choice, please try again.");
+            }
+        } while (choice != 7);
+
+        // Do not close System.in scanners manually to avoid NoSuchElementException
+    }
+
+    public static Collection<Product> selectStructure() {
+        System.out.println("\nSelect a structure:");
+        System.out.println("1. ArrayList");
+        System.out.println("2. LinkedList");
+        System.out.println("3. PriorityQueue");
+        System.out.println("4. ArrayDeque");
+        System.out.println("5. TreeSet");
+        System.out.println("6. HashSet");
+        System.out.print("Enter your choice: ");
+
+        int choice = scan.nextInt();
+        scan.nextLine();
+
+        switch (choice) {
+            case 1:
+                System.out.println("Using ArrayList");
+                return new ArrayList<>();
+            case 2:
+                System.out.println("Using LinkedList");
+                return new LinkedList<>();
+            case 3:
+                System.out.println("Using PriorityQueue");
+                return new PriorityQueue<>(Comparator.comparingInt(Product::getId));
+            case 4:
+                System.out.println("Using ArrayDeque");
+                return new ArrayDeque<>();
+            case 5:
+                System.out.println("Using TreeSet");
+                return new TreeSet<>(Comparator.comparingInt(Product::getId));
+            case 6:
+                System.out.println("Using HashSet");
+                return new HashSet<>();
+            default:
+                System.out.println("Invalid choice. Defaulting to ArrayList.");
+                return new ArrayList<>();
+        }
+    }
+
+    public static void displayMenu() {
+        System.out.println("\n--- Menu ---");
+        System.out.println("1. Add");
+        System.out.println("2. Remove");
+        System.out.println("3. Update");
+        System.out.println("4. Duplicate");
+        System.out.println("5. Display");
+        System.out.println("6. Iterate Display");
+        System.out.println("7. Exit");
+    }
+}
 
 class Product {
     private int id;
@@ -213,110 +310,5 @@ class InventoryOperations {
         for (Product product : sortedProducts) {
             System.out.println(product);
         }
-    }
-
-    public void closeScanner() {
-        scan.close();
-    }
-}
-
-public class assignment7 {
-    private static Scanner scan = new Scanner(System.in);
-
-    public static void main(String[] args) {
-        System.out.println("========== Inventory Management System ==========");
-
-        Collection<Product> inventory = selectStructure();
-        InventoryOperations operations = new InventoryOperations(inventory);
-
-        int choice;
-        do {
-            displayMenu();
-            System.out.print("Enter your choice: ");
-            choice = scan.nextInt();
-            scan.nextLine();
-
-            switch (choice) {
-                case 1:
-                    operations.addInventory();
-                    break;
-                case 2:
-                    operations.deleteInventory();
-                    break;
-                case 3:
-                    operations.updateInventory();
-                    break;
-                case 4:
-                    operations.checkDuplicates();
-                    break;
-                case 5:
-                    operations.normDisplay();
-                    break;
-                case 6:
-                    operations.iterateDisplay();
-                    break;
-                case 7:
-                    System.out.println("Exiting the program...");
-                    break;
-                default:
-                    System.out.println("Invalid choice, please try again.");
-            }
-        } while (choice != 7);
-
-        operations.closeScanner();
-        scan.close();
-    }
-
-    public static Collection<Product> selectStructure() {
-        System.out.println("\nSelect a structure:");
-        System.out.println("1. ArrayList");
-        System.out.println("2. LinkedList");
-        System.out.println("3. PriorityQueue");
-        System.out.println("4. ArrayDeque");
-        System.out.println("5. TreeSet");
-        System.out.println("6. HashSet");
-        System.out.println("7. HashMap");
-        System.out.print("Enter your choice: ");
-
-        int choice = scan.nextInt();
-        scan.nextLine();
-
-        switch (choice) {
-            case 1:
-                System.out.println("Using ArrayList");
-                return new ArrayList<>();
-            case 2:
-                System.out.println("Using LinkedList");
-                return new LinkedList<>();
-            case 3:
-                System.out.println("Using PriorityQueue");
-                return new PriorityQueue<>(Comparator.comparingInt(Product::getId));
-            case 4:
-                System.out.println("Using ArrayDeque");
-                return new ArrayDeque<>();
-            case 5:
-                System.out.println("Using TreeSet");
-                return new TreeSet<>(Comparator.comparingInt(Product::getId));
-            case 6:
-                System.out.println("Using HashSet");
-                return new HashSet<>();
-            case 7:
-                System.out.println("Using HashMap");
-                return new HashMap<Integer, Product>().values();
-            default:
-                System.out.println("Invalid choice. Defaulting to ArrayList.");
-                return new ArrayList<>();
-        }
-    }
-
-    public static void displayMenu() {
-        System.out.println("\n--- Menu ---");
-        System.out.println("1. Add");
-        System.out.println("2. Remove");
-        System.out.println("3. Update");
-        System.out.println("4. Duplicate");
-        System.out.println("5. Display");
-        System.out.println("6. Iterate Display");
-        System.out.println("7. Exit");
     }
 }
